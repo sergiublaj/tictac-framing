@@ -9,7 +9,7 @@
 
 (defglobal ?*main-in-debug* = FALSE) ; TRUE
 (defglobal ?*ag-tic-in-debug* = FALSE) ; TRUE
-(defglobal ?*totalNrRules* = 6823) ; 250, 260
+(defglobal ?*totalNrRules* = 7911) ; 250, 260
 
 ;
 ;----------Modul: PERCEPT-MANAGER-----------

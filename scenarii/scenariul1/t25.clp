@@ -36,7 +36,6 @@
 (ag_percept (percept_pobj road_sign_3) (percept_pname isa) (percept_pval road_sign))
 (ag_percept (percept_pobj road_sign_4) (percept_pname isa) (percept_pval road_sign))
 ;; cars
-(ag_percept (percept_pobj red_car) (percept_pname isa) (percept_pval car))
 (ag_percept (percept_pobj ego) (percept_pname isa) (percept_pval car))
 
 
@@ -77,8 +76,7 @@
 (ag_percept (percept_pobj road_sign_3) (percept_pname partof) (percept_pval right_lane_1_3))
 (ag_percept (percept_pobj road_sign_4) (percept_pname partof) (percept_pval right_lane_1_4))
 ;; cars
-(ag_percept (percept_pobj red_car) (percept_pname partof) (percept_pval lane_1))
-(ag_percept (percept_pobj ego) (percept_pname partof) (percept_pval lane_1))
+(ag_percept (percept_pobj ego) (percept_pname partof) (percept_pval right_lane_2_1))
 
 
 
@@ -112,7 +110,6 @@
 (ag_percept (percept_pobj road_sign_3) (percept_pname type) (percept_pval roundabout_sign))
 (ag_percept (percept_pobj road_sign_4) (percept_pname type) (percept_pval roundabout_sign))
 ;; cars
-(ag_percept (percept_pobj red_car) (percept_pname type) (percept_pval fiat))
 (ag_percept (percept_pobj ego) (percept_pname type) (percept_pval dacia))
 
 
@@ -138,31 +135,23 @@
 (ag_percept (percept_pobj road_3) (percept_pname angle_with_statue) (percept_pval 180))
 ;; 4th exit
 (ag_percept (percept_pobj road_4) (percept_pname angle_with_statue) (percept_pval 270))
+;; cars
+(ag_percept (percept_pobj ego) (percept_pname angle_with_statue) (percept_pval 90))
 
 
 
 ;; PERCEPT TYPE: flash
 ;; cars
-(ag_percept (percept_pobj red_car) (percept_pname flash) (percept_pval right))
-(ag_percept (percept_pobj ego) (percept_pname flash) (percept_pval left))
+(ag_percept (percept_pobj ego) (percept_pname flash) (percept_pval right))
 
 
 
 ;; PERCEPT TYPE: direction
 ;; cars
-(ag_percept (percept_pobj red_car) (percept_pname direction) (percept_pval left))
-(ag_percept (percept_pobj ego) (percept_pname direction) (percept_pval ahead))
-
-
-
-;; PERCEPT TYPE: distance_to_roundabout
-;; cars
-(ag_percept (percept_pobj red_car) (percept_pname distance_to_roundabout) (percept_pval 0))
-(ag_percept (percept_pobj ego) (percept_pname distance_to_roundabout) (percept_pval 0))
+(ag_percept (percept_pobj ego) (percept_pname direction) (percept_pval right))
 
 
 
 ;; PERCEPT TYPE: obstacle_to_right
 ;; cars
-(ag_percept (percept_pobj red_car) (percept_pname obstacle_to_right) (percept_pval false))
-(ag_percept (percept_pobj ego) (percept_pname obstacle_to_right) (percept_pval true))
+(ag_percept (percept_pobj ego) (percept_pname obstacle_to_right) (percept_pval false))

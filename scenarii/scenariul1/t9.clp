@@ -155,3 +155,17 @@
 ;; cars
 (ag_percept (percept_pobj red_car) (percept_pname direction) (percept_pval left))
 (ag_percept (percept_pobj ego) (percept_pname direction) (percept_pval right))
+
+
+
+;; PERCEPT TYPE: distance_to_roundabout
+;; cars
+(ag_percept (percept_pobj red_car) (percept_pname distance_to_roundabout) (percept_pval 0))
+(ag_percept (percept_pobj ego) (percept_pname distance_to_roundabout) (percept_pval 0))
+
+
+
+;; PERCEPT TYPE: obstacle_to_right
+;; cars
+(ag_percept (percept_pobj red_car) (percept_pname obstacle_to_right) (percept_pval false))
+(ag_percept (percept_pobj ego) (percept_pname obstacle_to_right) (percept_pval true))

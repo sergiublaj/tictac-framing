@@ -159,3 +159,10 @@
 ;; cars
 (ag_percept (percept_pobj red_car) (percept_pname distance_to_roundabout) (percept_pval 10))
 (ag_percept (percept_pobj ego) (percept_pname distance_to_roundabout) (percept_pval 10))
+
+
+
+;; PERCEPT TYPE: obstacle_to_right
+;; cars
+(ag_percept (percept_pobj red_car) (percept_pname obstacle_to_right) (percept_pval false))
+(ag_percept (percept_pobj ego) (percept_pname obstacle_to_right) (percept_pval true))

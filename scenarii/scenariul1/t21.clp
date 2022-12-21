@@ -149,3 +149,15 @@
 ;; PERCEPT TYPE: direction
 ;; cars
 (ag_percept (percept_pobj ego) (percept_pname direction) (percept_pval ahead))
+
+
+
+;; PERCEPT TYPE: distance_to_roundabout
+;; cars
+(ag_percept (percept_pobj ego) (percept_pname distance_to_roundabout) (percept_pval 0))
+
+
+
+;; PERCEPT TYPE: obstacle_to_right
+;; cars
+(ag_percept (percept_pobj ego) (percept_pname obstacle_to_right) (percept_pval false))

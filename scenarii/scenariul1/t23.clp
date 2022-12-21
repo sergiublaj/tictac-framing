@@ -76,7 +76,7 @@
 (ag_percept (percept_pobj road_sign_3) (percept_pname partof) (percept_pval right_lane_1_3))
 (ag_percept (percept_pobj road_sign_4) (percept_pname partof) (percept_pval right_lane_1_4))
 ;; cars
-(ag_percept (percept_pobj ego) (percept_pname partof) (percept_pval right_lane_2_2))
+(ag_percept (percept_pobj ego) (percept_pname partof) (percept_pval right_lane_2_1))
 
 
 
@@ -143,3 +143,15 @@
 ;; PERCEPT TYPE: direction
 ;; cars
 (ag_percept (percept_pobj ego) (percept_pname direction) (percept_pval ahead))
+
+
+
+;; PERCEPT TYPE: distance_to_roundabout
+;; cars
+(ag_percept (percept_pobj ego) (percept_pname distance_to_roundabout) (percept_pval 20))
+
+
+
+;; PERCEPT TYPE: obstacle_to_right
+;; cars
+(ag_percept (percept_pobj ego) (percept_pname obstacle_to_right) (percept_pval false))
