@@ -8,7 +8,7 @@
 (deftemplate MAIN::tic)
 
 (defglobal ?*main-in-debug* = FALSE) ; TRUE
-(defglobal ?*ag-tic-in-debug* = FALSE) ; TRUE
+(defglobal ?*ag-tic-in-debug* = TRUE) ; TRUE
 (defglobal ?*totalNrRules* = 7911) ; 250, 260
 
 ;
