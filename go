@@ -4,7 +4,9 @@
 (load "MAIN-rules.clp")
 (load "PERCEPT-MANAGER.clp")
 (load "AddMomentBelifsGetStartTime.clp")
-(load "./agenti/DRIVER-AGENT1.clp") ; ./agenti/DRIVER-AGENT2.clp, ./agenti/DRIVER-AGENT3.clp
+; (load "./agenti/DRIVER-AGENT1.clp")
+; (load "./agenti/DRIVER-AGENT2.clp")
+(load "./agenti/DRIVER-AGENT3.clp") 
 (load "TellDeleteMomentBelifsGetEndTime.clp")
 (load "initials.clp")
 (load "maneuverValidityASK.clp")

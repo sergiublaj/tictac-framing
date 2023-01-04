@@ -14,6 +14,7 @@
 (ag_percept (percept_pobj yellow_car) (percept_pname isa) (percept_pval car))
 
 
+
 ;; PERCEPT TYPE: partof
 ;; road
 (ag_percept (percept_pobj road_1) (percept_pname partof) (percept_pval event_1))

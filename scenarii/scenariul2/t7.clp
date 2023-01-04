@@ -14,6 +14,7 @@
 (ag_percept (percept_pobj yellow_car) (percept_pname isa) (percept_pval car))
 
 
+
 ;; PERCEPT TYPE: partof
 ;; road
 (ag_percept (percept_pobj road_1) (percept_pname partof) (percept_pval event_1))
@@ -61,3 +62,10 @@
 ;; cars
 (ag_percept (percept_pobj ego) (percept_pname distance_to_crosswalk) (percept_pval 27))
 (ag_percept (percept_pobj yellow_car) (percept_pname distance_to_crosswalk) (percept_pval 40))
+
+
+
+;; PERCEPT TYPE: obstacle_to_right
+;; cars
+(ag_percept (percept_pobj ego) (percept_pname obstacle_to_right) (percept_pval false))
+(ag_percept (percept_pobj yellow_car) (percept_pname obstacle_to_right) (percept_pval false))

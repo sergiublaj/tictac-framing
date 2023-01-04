@@ -2,23 +2,13 @@
 ;-------Auxiliary facts ---------------------------------------
 ;
 
-
-(defrule AGENT::initCycle-right-turn
+(defrule AGENT::initCycle-intersection-framing
     (declare (salience 89))
-    (timp (valoare ?)) ;make sure it fires each cycle
+    (timp (valoare ?)) ; make sure it fires each cycle
 =>
-    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>initCycle-right-turn prohibited by default " crlf))
-    (assert (ag_bel (bel_type moment) (bel_pname right-turn-maneuver) (bel_pval prohibited))) ;by default, we assume overtaking NOT valid
-    ;(facts AGENT)
-)
-
-(defrule AGENT::initCycle-left-turn
-    (declare (salience 89))
-    (timp (valoare ?)) ;make sure it fires each cycle
-=>
-    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>initCycle-left-turn prohibited by default " crlf))
-    (assert (ag_bel (bel_type moment)  (bel_pname left-turn-maneuver) (bel_pval prohibited))) ;by default, we assume overtaking NOT valid
-    ;(facts AGENT)
+    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>initCycle-intersection-framing prohibited by default " crlf))
+    (assert (ag_bel (bel_type moment) (bel_pname intersection-framing-maneuver) (bel_pval prohibited))) ; by default, we assume intersection frmaing NOT valid
+    ; (facts AGENT)
 )
 
 ;;----------------------------------
@@ -27,50 +17,55 @@
 ;;
 ;;----------------------------------
 
-;--- Sign forbidding right turn or forcing either go ahead or left turn
-(defrule AGENT::r-no-right-turn-sign
+;
+;-------Check percepts to update restriction fluents-----------
+;
+
+(defrule AGENT::proper-flash
     (timp (valoare ?t))
-    (ag_bel (bel_pobj ?ps) (bel_pname isa) (bel_pval road_sign))
-    (ag_bel (bel_pobj ?ps) (bel_pname semnificatie) (bel_pval ?v&interzis_viraj_dreapta | obligatoriu_inainte | obligatoriu_stanga | obligatoriu_inainte_stanga))
+    (ag_bel (bel_type moment) (bel_pobj ego) (bel_pname flash) (bel_pval ?flash&left))
+  ; V2 (ag_bel (bel_type moment) (bel_pobj ego) (bel_pname flash) (bel_pval ?flash))
+	; V2 (test (eq ?flash left))
 =>
-    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>r-no-right-turn-sign" crlf))
-    (assert (ag_bel (bel_type fluent) (bel_pname no-right-turn-zone) (bel_pval yes)))
-    ;(facts AGENT)
+    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>proper-flash: invalid flash (left)" crlf))
+    (assert (ag_bel (bel_type moment) (bel_pname invalid-flash) (bel_pval yes)))
 )
 
-(defrule AGENT::r-no-right-turn-zone-end
+(defrule AGENT::proper-space
     (timp (valoare ?t))
-    ?f <- (ag_bel (bel_type fluent) (bel_pname no-right-turn-zone) (bel_pval yes))
-    (ag_bel (bel_pobj ?ps) (bel_pname isa) (bel_pval area_limit))
-    (ag_bel (bel_pobj ?ps) (bel_pname semnificatie) (bel_pval intersection_end))
+	  (ag_bel (bel_type moment) (bel_pobj ego) (bel_pname obstacle_to_right) (bel_pval true))
 =>
-    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>r-no-right-turn-zone-end we crossed an intersection" crlf))
-    (retract ?f)
+    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>proper-space: invalid space (not enough)" crlf))
+    (assert (ag_bel (bel_type moment) (bel_pname invalid-space) (bel_pval yes)))
 )
 
- ;--- Sign forbidding access on a street
-(defrule AGENT::r-no-access
+(defrule AGENT::proper-distance
     (timp (valoare ?t))
-    (ag_bel (bel_pobj ?ps) (bel_pname isa) (bel_pval road_sign))
-    (ag_bel (bel_pobj ?ps) (bel_pname semnificatie) (bel_pval ?v& accesul_interzis | circulatia_interzisa_in_ambele_sensuri))
-    ;;;(ag_bel (bel_pobj ?ps) (bel_pname direction) (bel_pval ?pd& right | left))
+	  (ag_bel (bel_type moment) (bel_pobj ?car) (bel_pname distance_to_crosswalk) (bel_pval ?d))
+    (test (< ?d 25))
 =>
-    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>r-no-access" crlf))
-    (assert (ag_bel (bel_type moment) (bel_pname no-access) (bel_pval yes)))
-    ;(facts AGENT)
+    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>proper-distance: invalid distance (" ?d ")" crlf))
+    (assert (ag_bel (bel_type moment) (bel_pname invalid-distance) (bel_pval yes)))
 )
 
-;-----Validate intention of right-turn: check if there is any restriction ----------
-(defrule AGENT::validate-right-turn
+(defrule AGENT::proper-direction
+    (timp (valoare ?t))
+	  (ag_bel (bel_type moment) (bel_pobj ego) (bel_pname direction) (bel_pval left))
+=>
+    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>proper-direction: invalid direction (left)" crlf))
+    (assert (ag_bel (bel_type moment) (bel_pname invalid-direction) (bel_pval yes)))
+)
+
+;-----Validate intention of intersection-framing: check if there is any restriction ----------
+(defrule AGENT::validate-intersection-framing
     (declare (salience -10))
-    ?f <- (ag_bel (bel_type moment) (bel_pname right-turn-maneuver) (bel_pval prohibited))
-    (not (ag_bel (bel_type fluent) (bel_pname no-right-turn-zone) (bel_pval yes)))
-    ;(not (ag_bel (bel_type moment) (bel_pname no-access) (bel_pval yes) (bel_pdir right)))
-    ;; TODO: manage direction
-    (not (ag_bel (bel_type moment) (bel_pname no-access) (bel_pval yes)))
+    ?f <- (ag_bel (bel_type moment) (bel_pname intersection-framing-maneuver) (bel_pval prohibited))
+    (not (ag_bel (bel_type moment) (bel_pname invalid-flash) (bel_pval yes)))
+    (not (ag_bel (bel_type moment) (bel_pname invalid-space) (bel_pval yes)))
+    (not (ag_bel (bel_type moment) (bel_pname invalid-distance) (bel_pval yes)))
+    (not (ag_bel (bel_type moment) (bel_pname invalid-direction) (bel_pval yes)))
 =>
-    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>validate-right-turn NU->DA (nu avem restrictii) " crlf))
+    (if (eq ?*ag-in-debug* TRUE) then (printout t "    <D>validate-intersection-framing NO->YES (no restrictions) " crlf))
     (retract ?f)
-    (assert (ag_bel (bel_type moment) (bel_pname right-turn-maneuver) (bel_pval allowed)))
-    ;(facts AGENT)
+    (assert (ag_bel (bel_type moment) (bel_pname intersection-framing-maneuver) (bel_pval allowed)))
 )
