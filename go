@@ -11,4 +11,6 @@
 (load "initials.clp")
 (load "maneuverValidityASK.clp")
 (reset)
+(bind ?t (time))
 (run ?*totalNrRules*)
+(printout t "INFERENCE TIME: " (- (time) ?t) crlf)
