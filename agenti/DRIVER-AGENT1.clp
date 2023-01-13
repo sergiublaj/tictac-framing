@@ -66,6 +66,3 @@
     (retract ?f)
     (assert (ag_bel (bel_type moment) (bel_pname roundabout-framing-maneuver) (bel_pval allowed)))
 )
-
-
-; de testat timpii

@@ -13,7 +13,7 @@
 ; (defglobal ?*ag-tic-in-debug* = TRUE)
 ; (defglobal ?*totalNrRules* = 7911)
 ; (defglobal ?*totalNrRules* = 1000)
-(defglobal ?*totalNrRules* = 520)
+(defglobal ?*totalNrRules* = 569)
 
 
 ;
@@ -52,8 +52,8 @@
 ; (defglobal ?*ag-in-debug* = TRUE)
 (defglobal ?*ag-percepts-in-debug* = FALSE)
 ; (defglobal ?*ag-percepts-in-debug* = TRUE)
-(defglobal ?*ag-measure-time* = FALSE)
-; (defglobal ?*ag-measure-time* = TRUE)
+; (defglobal ?*ag-measure-time* = FALSE)
+(defglobal ?*ag-measure-time* = TRUE)
 
 (deftemplate ag_bel
     (slot bel_type) ; fluent|moment
